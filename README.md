@@ -35,8 +35,10 @@ tweets = search_tweets(query=query, limit=50)
 # output 
 
 #[{'time': 'Oct 19, 2020 · 8:23 PM UTC',
-#  'tweet': 'Gua jadi bertanya dlm hati\nKok demo..},
+#  'tweet': 'Gua jadi bertanya dlm hati\nKok demo..,
+#  'username': '@Fajar_Bumaye'},
 #  {'time': 'Oct 19, 2020 · 6:42 PM UTC',
-#  'tweet': 'terimakasih pak jokowi at..},
+#  'tweet': 'terimakasih pak jokowi at..,
+#  'username': '@Ajacan1'},
 #  ...]
 ```
