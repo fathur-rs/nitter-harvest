@@ -16,6 +16,19 @@ class HTML:
 
 
 def search_tweets(query: str, limit: int = 100) -> list:
+    """scrapper for hashtag, topic, search query tweets
+
+    Args:
+        query (str): user's search query
+        limit (int, optional): max tweets to scrape. Defaults to 100.
+
+    Returns:
+        list[dict]: scrapped tweet's => [
+            "time",
+            "tweet",
+            "username
+        ]
+    """
     
     driver = start_webdriver() # Start webdriver
     driver.get("https://nitter.net/search?") # Get to search page
