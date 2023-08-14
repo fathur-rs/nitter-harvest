@@ -22,7 +22,7 @@ def search_tweets(query: str, limit: int = 100) -> list:
         list[dict]: scrapped tweet's => [
             "time",
             "tweet",
-            "username
+            "username"
         ]
     """
     
