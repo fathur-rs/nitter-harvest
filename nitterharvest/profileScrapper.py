@@ -19,7 +19,8 @@ def profile_tweets(username: str, limit: int = 100) -> list:
         limit (int, optional): max tweets to scrape. Defaults to 100.
 
     Returns:
-        list[str]: scrapped tweet's => []
+        list[str]: scrapped tweet's => [
+            "time",
             "tweets"
         ]
     """
