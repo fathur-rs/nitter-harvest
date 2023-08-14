@@ -1,16 +1,16 @@
+from utils.webdriver import start_webdriver
 from bs4 import BeautifulSoup
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
-from utils.webdriver import start_webdriver
 
 class HTML:
     SHOW_MORE_BUTTON = "//div[@class='show-more']"
     TWEET_TEXT = ".tweet-content"
 
 
-def user_tweets(username: str, limit: int = 100) -> list:
-    """scrapper for user's tweets
+def profile_tweets(username: str, limit: int = 100) -> list:
+    """scrapper for profile's tweets
 
     Args:
         username (str): twitter username
@@ -38,13 +38,15 @@ def user_tweets(username: str, limit: int = 100) -> list:
             # click show more / next page
             load_more_button.click()
             print(f"Tweets scraped: {len(tweets_corpus)}")
-                
+            
+            # Limit n scrapped tweets
             if len(tweets_corpus) >= limit:
                 print("=== done! ===")
                 
                 print(f"success scrapping {len(tweets_corpus)} tweets")
                 break
             
+    # If there's no element left to scrape then error -> scrapped finish       
     except Exception as _:
         print("Finished loading all content or an error occurred:", str(_))
         
