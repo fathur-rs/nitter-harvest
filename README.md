@@ -30,7 +30,7 @@ tweets = profile_tweets(username='jokowi', limit=50)
 from nitter-harvest.searchScrapper import search_tweets
 
 query = "#jokowi lang:id since:2020-10-20"
-tweets = profile_tweets(query=query, limit=50)
+tweets = search_tweets(query=query, limit=50)
 
 # output 
 
