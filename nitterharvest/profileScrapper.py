@@ -1,6 +1,6 @@
 # utils
-from utils.webdriver import start_webdriver
-from utils.html_element import LOAD_MORE, TWEET
+from .utils.webdriver import start_webdriver
+from .utils.html_element import LOAD_MORE, TWEET
 
 # webdriver
 from selenium.webdriver.support import expected_conditions as EC
@@ -40,7 +40,6 @@ def profile_tweets(username: str, limit: int = 100) -> list:
             tweets = soup.find_all('div', class_=TWEET.CONTAINER)
             for tweet in tweets:
                 try:
-                    tweets_corpus.append(tweet.get_text())
                     tweet_text = tweet.find('div', class_=TWEET.TEXT).get_text() # Scrapped tweet text
                     
                     tweet_time = tweet.find('span', class_=TWEET.TIME).find('a')['title'] # Scrapped time

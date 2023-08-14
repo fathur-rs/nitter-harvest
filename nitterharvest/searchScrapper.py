@@ -1,6 +1,6 @@
 # utils
-from utils.webdriver import start_webdriver
-from utils.html_element import LOAD_MORE, SEARCH, TWEET
+from .utils.webdriver import start_webdriver
+from .utils.html_element import LOAD_MORE, SEARCH, TWEET
 
 # webdriver
 from selenium.webdriver.support import expected_conditions as EC
