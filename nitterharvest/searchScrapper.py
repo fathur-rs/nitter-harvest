@@ -1,6 +1,7 @@
 # utils
 from .utils.webdriver import start_webdriver
-from .utils.html_element import LOAD_MORE, SEARCH, TWEET
+from .utils.html_element import HTML
+html = HTML()
 
 # webdriver
 from selenium.webdriver.support import expected_conditions as EC
@@ -32,24 +33,24 @@ def search_tweets(query: str, limit: int = 100) -> list:
     
     tweets_corpus = []
     try:
-        _search_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, SEARCH.FIELD))).send_keys(query) # Input user's query to search field
+        _search_field = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, html.search_field))).send_keys(query) # Input user's query to search field
         
-        _search_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, SEARCH.BUTTON))).click() # Find and click search button
+        _search_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, html.search_button))).click() # Find and click search button
         
         while True:
             # Try to find the "show more" button and click it
-            load_more_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, LOAD_MORE.BUTTON))) 
+            load_more_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, html.load_more_button))) 
             
             # Parser HTML page
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             
             # Get all tweet div
-            tweets = soup.find_all('div', class_=TWEET.CONTAINER)
+            tweets = soup.find_all('div', class_=html.tweet_container)
             for tweet in tweets:
                 try:
-                    username = tweet.find('a', class_=TWEET.USERNAME).get_text() # Scrapped username
-                    tweet_text = tweet.find('div', class_=TWEET.TEXT).get_text() # Scrapped tweet text
-                    tweet_time = tweet.find('span', class_=TWEET.TIME).find('a')['title'] # Scrapped time
+                    username = tweet.find('a', class_=html.tweet_username).get_text() # Scrapped username
+                    tweet_text = tweet.find('div', class_=html.tweet_text).get_text() # Scrapped tweet text
+                    tweet_time = tweet.find('span', class_=html.tweet_time).find('a')['title'] # Scrapped time
                     
                     tweets_corpus.append(
                         {

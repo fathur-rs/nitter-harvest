@@ -1,12 +1,14 @@
-class LOAD_MORE:
-    BUTTON = "//div[@class='show-more']"
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class HTML:
+    load_more_button: str = "//div[@class='show-more']"
     
-class SEARCH:
-    FIELD = "//input[@name='q']"
-    BUTTON = "//button[@type='submit']"
+    search_field:str = "//input[@name='q']"
+    search_button:str = "//button[@type='submit']"
     
-class TWEET:
-    CONTAINER = "timeline-item"
-    TEXT = "tweet-content"
-    USERNAME = "username"
-    TIME = "tweet-date"
+    tweet_container:str = "timeline-item"
+    tweet_text:str = "tweet-content"
+    tweet_username:str = "username"
+    tweet_time:str = "tweet-date"
