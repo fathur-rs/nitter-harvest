@@ -8,7 +8,7 @@
 #####
     Directory
     
-    ├── nitter-harvest                  # Cloned repo
+    ├── nitterharvest                  # Cloned repo, cd to nitter-harvest
     └── <your-code>.py/ipynb            # Your code
 # use case
 ### 1. Profile Scrapper
