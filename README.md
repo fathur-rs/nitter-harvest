@@ -4,11 +4,11 @@
 # how to use?
 1. Download Firefox browser and geckodriver then, installed it. You can find the tutorial right here: [Tutorial](https://www.youtube.com/watch?v=4NxqmX6F6po).
 2. Clone the repository.
-3. Create new .py or .ipynb on the same directory of the repo. Like below.
+3. Create new .py or .ipynb outside the directory of the cloned repo. Like below.
 #####
     Directory
     
-    ├── nitterharvest                  # Cloned repo, cd to nitter-harvest
+    ├── nitter-harvest                  # Cloned repo, cd to nitter-harvest
     └── <your-code>.py/ipynb            # Your code
 # use case
 ### 1. Profile Scrapper
