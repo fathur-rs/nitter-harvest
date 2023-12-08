@@ -4,16 +4,20 @@
 # how to use?
 1. Download Firefox browser and geckodriver then, installed it. You can find the tutorial right here: [Tutorial](https://www.youtube.com/watch?v=4NxqmX6F6po).
 2. Clone the repository.
-3. Create new .py or .ipynb outside the directory of the cloned repo. Like below.
+3. cd to nitter-harvest
+4. Create new .py or .ipynb. Like below.
 #####
     Directory
-    
-    ├── nitter-harvest                  # Cloned repo, cd to nitter-harvest
-    └── <your-code>.py/ipynb            # Your code
+    nitter-harvest # Cloned Repo, cd to nitter-harvest
+    │
+    ├── nitterharvest # scrapping module
+    │
+    └── <your-code>.py/ipynb # your code
+
 # use case
 ### 1. Profile Scrapper
 ```python
-from nitter-harvest.profileScrapper import profile_tweets
+from nitterharvest.profileScrapper import profile_tweets
 
 tweets = profile_tweets(username='jokowi', limit=50)
 
@@ -27,7 +31,7 @@ tweets = profile_tweets(username='jokowi', limit=50)
 ```
 ### 2. Topic, Hashtag Scrapper
 ```python
-from nitter-harvest.searchScrapper import search_tweets
+from nitterharvest.searchScrapper import search_tweets
 
 query = "#jokowi lang:id since:2020-10-20"
 tweets = search_tweets(query=query, limit=50)
