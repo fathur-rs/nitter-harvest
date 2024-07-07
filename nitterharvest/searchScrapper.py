@@ -1,35 +1,46 @@
-# utils
 from .utils.webdriver import start_webdriver
 from .utils.html_element import HTML
 html = HTML()
 
-# webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
-# scrapper
 from bs4 import BeautifulSoup
 
 
 def search_tweets(query: str, limit: int = 100) -> list:
-    """scrapper for hashtag, topic, search query tweets
+    """
+    Scrape tweets based on a search query from nitter.poast.org.
+
+    This function uses Selenium WebDriver to navigate to nitter.poast.org's search page,
+    enter a search query, and scrape the resulting tweets. It continuously loads more tweets
+    until it reaches the specified limit or there are no more tweets to load.
 
     Args:
-        query (str): user's search query
-        limit (int, optional): max tweets to scrape. Defaults to 100.
+        query (str): The search query (hashtag, topic, or general search term).
+        limit (int, optional): The maximum number of tweets to scrape. Defaults to 100.
 
     Returns:
-        list[dict]: scrapped tweet's => [
-            "time",
-            "tweet",
-            "username"
-        ]
+        list[dict]: A list of dictionaries, each containing information about a single tweet.
+                    Each dictionary has the following keys:
+                    - 'time': The timestamp of the tweet (str)
+                    - 'tweet': The text content of the tweet (str)
+                    - 'username': The username of the tweet author (str)
+
+    Raises:
+        Exception: If an error occurs during the scraping process. The error message is printed.
+
+    Note:
+        - This function requires a working internet connection.
+        - The scraping process may take some time depending on the number of tweets requested.
+        - The function uses Selenium WebDriver, which must be properly set up in the environment.
+        - The HTML class from .utils.html_element is used for locating elements on the page.
     """
     
-    driver = start_webdriver() # Start webdriver
-    driver.get("https://nitter.net/search?") # Get to search page
-    print("=== searching... ===")
+    driver = start_webdriver() 
+    driver.get("https://nitter.poast.org/search?") 
+    print(f"=== searching... {query} ===")
     
     tweets_corpus = []
     try:
@@ -38,13 +49,10 @@ def search_tweets(query: str, limit: int = 100) -> list:
         _search_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, html.search_button))).click() # Find and click search button
         
         while True:
-            # Try to find the "show more" button and click it
             load_more_button = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, html.load_more_button))) 
             
-            # Parser HTML page
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             
-            # Get all tweet div
             tweets = soup.find_all('div', class_=html.tweet_container)
             for tweet in tweets:
                 try:
@@ -58,27 +66,22 @@ def search_tweets(query: str, limit: int = 100) -> list:
                             'tweet':tweet_text,
                             'username':username
                         }
-                    ) # Append data to tweets_corpus: list
+                    ) 
                 
-                # Skip first tweet component after n+1 pages, beacuse its not containing scrapped element    
                 except AttributeError: 
                     continue
                 
-            # click show more / next page
             load_more_button.click()
             print(f"Tweets scraped: {len(tweets_corpus)}")
             
-            # Limit n scrapped tweets
             if len(tweets_corpus) >= limit:
                 print("=== done! ===")
                 
                 print(f"success scrapping {len(tweets_corpus)} tweets")
                 break
     
-    # If there's no element left to scrape then error -> scrapped finish
     except Exception as _:
         print("Finished loading all content or an error occurred:", str(_))
         
     
-    # scraped tweets
     return tweets_corpus
