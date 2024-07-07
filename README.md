@@ -1,6 +1,4 @@
-Here's a simplified version of the README.md:
-
-```markdown
+```
 # nitter-harvest
 
 A Python library for scraping data from Nitter.net, a Twitter mirror site. Uses Selenium and BeautifulSoup for efficient data extraction.
