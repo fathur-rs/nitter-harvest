@@ -1,4 +1,3 @@
-```
 # nitter-harvest
 
 A Python library for scraping data from Nitter.net, a Twitter mirror site. Uses Selenium and BeautifulSoup for efficient data extraction.
@@ -45,4 +44,3 @@ Both functions return a list of dictionaries containing tweet data:
 ## Note
 
 This tool is for educational purposes only. Respect website terms of service and Twitter's policies when using scraped data.
-```
